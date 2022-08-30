@@ -5,4 +5,10 @@ edition = "2021"
 
 [dependencies]
 log = "0.4.14"
-bitflags = "1.2.1"
+nalgebra = "0.31.1"
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
