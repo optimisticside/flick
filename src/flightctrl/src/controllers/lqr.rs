@@ -28,6 +28,9 @@ pub fn solve_cont_riccati<T: FloatCore>(a: &Matrix, b: &Matrix, c: &Matrix, q: &
 
     let relative_norm: f64;
     let iteration = 0;
+
+    let z = h.clone_owned();
+    let z_old = z.clone_owned();
     let power = z.rows() as f64;
 
     loop {
@@ -45,6 +48,8 @@ pub fn solve_cont_riccati<T: FloatCore>(a: &Matrix, b: &Matrix, c: &Matrix, q: &
             break;
         }
     }
+
+
 }
 
 pub struct LinearQuadraticRegulator {
