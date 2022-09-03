@@ -6,7 +6,7 @@ pub type DiffEq<T: FloatCore> = fn(x: T, y: T) -> T;
 pub fn rk4<T: FloatCore>(equation: DiffEq<T>, x0: T, y0: T, x: T, step_size: T) -> T {
     // Count the number of iterations using the stp size.
     let iter_count = ((x - x0) / step_size) as usize;
-    let kutta[T; 4] = [0; 4];
+    let kutta[T; 4] = [0 as T; 4];
     let y = y0;
 
     for i in 1..iter_count {
