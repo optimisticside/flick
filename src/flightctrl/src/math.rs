@@ -1,3 +1,5 @@
+use num_traits::float::FloatCore;
+
 /// Differential equation function type that takes in the x and y values.
 pub type DiffEq<T: FloatCore> = fn(x: T, y: T) -> T;
 
