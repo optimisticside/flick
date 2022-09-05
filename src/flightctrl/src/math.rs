@@ -24,3 +24,41 @@ pub fn rk4<T: FloatCore>(equation: DiffEq<T>, mut x0: T, mut y0: T, mut x: T, st
 
     y
 }
+
+/// Implementation of Verlet integration. 
+/// Uses the formula: x(t + Δt) = 2x(t) - x(t - Δt) + a(t)Δt² + error 
+/// This routine is here for reference purposes, and serves no practical purpose.
+pub fn verlet<T: FloatCore>(mut position: T, acceleration: T, delta_time: T) -> T {
+    let mut previous_position = position;
+    let mut time = 0 as T;
+
+    while position > 0 {
+        time += delta_time;
+        let temporary = position;
+        position = (2 * position) - previous_position + acceleration * (delta_time * delta_time);
+        previous_position = temporary;
+    }
+
+    time
+}
+
+/// Implementation of Störmer Verlet. Same as other [`verlet`] procedure, but also calculates the
+/// position. Returns the time followed by the calculated velocity.
+pub fn stormer_verlet<T: FloatCore>(mut position: T, acceleration: T, delta_time: T) -> (T, T) {
+    let mut previous_position = position;
+    let mut velocity = 0 as T;
+    let mut time = 0 as T;
+
+    while position > 0 {
+        time += delta_time;
+        let temporary = position;
+        position = (2 * position) - previous_position + acceleration * (delta_time * delta_time);
+        previous_position = temporary;
+
+        // Acceleration is constnat so velocity is just a matter of multiplication.
+        velocity += acceleration * delta_time;
+    }
+
+    (time, velocity)
+}
+
