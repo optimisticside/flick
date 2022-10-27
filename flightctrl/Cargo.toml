@@ -8,6 +8,14 @@ log = "0.4.14"
 num-traits = "0.2"
 nalgebra = "0.31.1"
 
+cortex-m = "0.7.6"
+cortex-m-rt = "0.7.1"
+embedded-hal = "0.2.7"
+
+teensy4-pins = "0.2.0"
+teensy4-panic = "0.2.0"
+teensy4-bsp = { version = "0.3", features = ["rt"] }
+
 [profile.dev]
 panic = "abort"
 
