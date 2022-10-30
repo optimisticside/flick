@@ -1,0 +1,14 @@
+[package]
+name = "flick-bridge"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+serde = { version = "1.0.147", default-features = false }
+postcard = "1.0.2"
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
