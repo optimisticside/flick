@@ -12,6 +12,7 @@ nalgebra = { version = "0.31.1", default-features = false }
 cortex-m = "0.7.6"
 cortex-m-rt = "0.7.1"
 embedded-hal = "0.2.7"
+cortex-m-rtic = { version = "0.5.8", default-features = false, features = ["cortex-m-7"] }
 
 teensy4-pins = "0.2.0"
 teensy4-panic = "0.2.0"
