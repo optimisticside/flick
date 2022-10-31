@@ -38,7 +38,7 @@ pub struct ControlOutput<T> {
 // needs to be done).
 impl<T> Pid<T>
 where
-    T: FloatCore
+    T: FloatCore,
 {
     /// Reset the integral term back to zero.
     fn reset_integral(&mut self) {

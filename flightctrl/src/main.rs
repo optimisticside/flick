@@ -3,12 +3,13 @@
 #![no_std]
 #![no_main]
 
+use core::time::Duration;
 use teensy4_bsp as bsp;
 use teensy4_panic as _;
-use core::time::Duration;
 
 mod control;
 mod logging;
+mod simulation;
 
 const LED_PERIOD: Duration = Duration::from_millis(1_000);
 /// The GPT output compare register we're using for tracking time. This is the first register,

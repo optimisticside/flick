@@ -1,9 +1,9 @@
 use core::fmt;
 
-use nalgebra::{OMatrix, OVector, RealField};
 use nalgebra::allocator::Allocator;
-use nalgebra::base::DefaultAllocator;
 use nalgebra::base::dimension::{Dim, DimMin, DimName};
+use nalgebra::base::DefaultAllocator;
+use nalgebra::{OMatrix, OVector, RealField};
 
 /// Linear Quadratic Regulator (LQR) feedback controller.
 ///
@@ -92,7 +92,9 @@ where
             hk = hk1.clone();
             error >= epsilon
         } {
-            let temp = (OMatrix::<T, S, S>::identity() + &gk * &hk).try_inverse().expect("Couldn't compute inverse");
+            let temp = (OMatrix::<T, S, S>::identity() + &gk * &hk)
+                .try_inverse()
+                .expect("Couldn't compute inverse");
             let ak1 = &ak * &temp * &ak;
             let gk1 = &gk + &ak * &temp * &gk * &ak.transpose();
             hk1 = &hk + &ak.transpose() * &hk * &temp * &ak;
@@ -101,7 +103,8 @@ where
         }
 
         // Calculate final gain matrix.
-        self.k = Some(r.clone().try_inverse().expect("Couldn't compute inverse") * b.transpose() * hk);
+        self.k =
+            Some(r.clone().try_inverse().expect("Couldn't compute inverse") * b.transpose() * hk);
         return Ok(self.k.clone().unwrap());
     }
 
@@ -148,6 +151,10 @@ where
         Allocator<T, S, S> + Allocator<T, C, C> + Allocator<T, S, C> + Allocator<T, C, S>,
 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "LqrController {{ q = {:?}, r = {:?}, ki: {:?} }}", self.q, self.r, self.ki)
+        write!(
+            f,
+            "LqrController {{ q = {:?}, r = {:?}, ki: {:?} }}",
+            self.q, self.r, self.ki
+        )
     }
-} 
+}
