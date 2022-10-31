@@ -36,14 +36,17 @@ pub struct ControlOutput<T> {
 
 // There is no need for a constructor since the object can just be constructed (no extra processing
 // needs to be done).
-impl<T: FloatCore> for Pid<T> {
+impl<T> Pid<T>
+where
+    T: FloatCore
+{
     /// Reset the integral term back to zero.
-    pub fn reset_integral(&mut self) {
-        self.integral = 0;
+    fn reset_integral(&mut self) {
+        self.integral = T::zero();
     }
 
     /// Given a new measurement, calculates the next control output.
-    pub fn calculate(&mut self, measurement: T) -> ControlOutput<T> {
+    fn calculate(&mut self, measurement: T) -> ControlOutput<T> {
         let error = self.setpoint - measurement;
         let proportional = error * self.kp;
         let integral = self.integral + error * self.ki;

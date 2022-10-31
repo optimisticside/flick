@@ -7,6 +7,7 @@ use teensy4_bsp as bsp;
 use teensy4_panic as _;
 use core::time::Duration;
 
+mod control;
 mod logging;
 
 const LED_PERIOD: Duration = Duration::from_millis(1_000);
