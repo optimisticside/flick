@@ -1,18 +1,18 @@
 use core::fmt;
 
-use crate::packet::Packet;
+use crate::message::Message;
 
 /// A bridge device is any device that can transmit and recieve packets.
 pub trait Device {
     /// Transmit a packet.
-    fn transmit(&self, packet: Packet) -> Result<(), DeviceError>;
-    /// Poll the device for a packet. If no packet is found, then `Ok(None)` is returned.
-    fn poll(&self) -> Result<Option<Packet>, DeviceError>;
+    fn transmit(&self, message: Message) -> Result<(), DeviceError>;
+    /// Poll the device for a message. If no message is found, then `Ok(None)` is returned.
+    fn poll(&self) -> Result<Option<Message>, DeviceError>;
 }
 
 #[derive(Debug, Clone)]
 pub enum DeviceError {
-    /// Reciever did not acknowledge a packets that the transmitter specified needed to be
+    /// Reciever did not acknowledge a message that the transmitter specified needed to be
     /// acknowledged.
     NotAcknowledged,
     /// An error with the physical device occured.

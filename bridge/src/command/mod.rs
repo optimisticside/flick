@@ -1,7 +1,6 @@
-
 use serde::{Deserialize, Serialize};
 
-/// A command is any request that can be sent through a packet.
+/// A command is any request that can be sent through a message.
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub enum Command {
 	/// Fire at the given pyro-channel. This is usually for when manual control is necessary, and
@@ -22,5 +21,5 @@ pub enum Command {
 /// Represents the response to a command.
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub enum CommandResponse {
-	
+	Telemetry()
 }
