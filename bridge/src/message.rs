@@ -1,12 +1,6 @@
 use serde::{Deserialize, Serialize};
 use crate::command::{Command, CommandResponse};
 
-bitflags::bitflags! {
-	/// Flags for packets. See [`Packet::flags`].
-	pub struct PacketFlags: u8 {
-	}
-}
-
 /// A message is the basis for all communication operations that can be done on the bridge.
 /// Messages contain the data to be sent, along with other metadata.
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -28,6 +22,14 @@ pub enum MessageKind {
 	Request(Command),
 	/// Response to a previously-sent command.
 	Response(u64, CommandResponse),
+	/// Handshake to establish connection between two parties, each with unique identifiers.
+	Handshake(u64, u64),
 	/// Acknowledges a previously-sent packet.
 	Ack(u64)
+}
+
+bitflags::bitflags! {
+	/// Flags for packets. See [`Message::flags`].
+	pub struct MessageFlags: u8 {
+	}
 }
