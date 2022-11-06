@@ -1,0 +1,11 @@
+[tool.pylint.message_control]
+max-line-length = 120
+disable = [
+	"pointless-string-statement",
+	"too-many-arguments",
+	"missing-docstring",
+	"too-many-locals",
+	"unused-argument",
+	"line-too-long",
+	"fixme",
+]
