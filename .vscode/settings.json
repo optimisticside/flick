@@ -1,0 +1,9 @@
+{
+    "[python]": {
+		"editor.insertSpaces": true,
+        "editor.tabSize": 4,
+    },
+	"[rust]": {
+		"editor.insertSpaces": false,
+	}
+}
