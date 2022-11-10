@@ -5,6 +5,7 @@ instead of throwing an error).
 """
 
 import dataclasses
+import enum
 import typing
 import os
 
@@ -21,6 +22,11 @@ SNAPSHOT_FORMAT = (
     "ddd"	# velocity: Vector3<f64>
     "ddd"	# acceleration: Vector3<f64>
 )
+
+
+class SystemState(enum.Enum):
+    """Rocket-state bitflag defenitions."""
+    FINISHED = 0x03
 
 
 @dataclasses.dataclass
@@ -45,3 +51,15 @@ def get_snapshot(stream: typing.BinaryIO) -> TelemetryShapshot:
 def snapshot_available(stream: typing.BinaryIO) -> bool:
     """Determines if another snapshot from the steam is available."""
     return os.fstat(stream).st_size >= struct.calcsize(SNAPSHOT_FORMAT)
+
+
+def collect_snapshots(stream: typing.BinaryIO) -> list[TelemetryShapshot]:
+    """Reduces stream of snapshots into an array. This is done by repeaetedly collecting new
+    shapshots until the finish-state is reached."""
+    snapshots = []
+
+    while len(snapshots) < 1 or snapshot[len(snapshots - 1)].state != SystemState.FINISHED:
+        snapshot = get_snapshot(stream)
+        snapshots.append(snapshot)
+    
+    return shapshots
